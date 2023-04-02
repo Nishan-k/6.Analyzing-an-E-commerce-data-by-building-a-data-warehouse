@@ -7,7 +7,7 @@ services:
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
     volumes:
-      - postgres:/bitnami/postgresql
+      - ./postgres:/bitnami/postgresql
   redis:
     image: 'bitnami/redis:latest'
     environment:
