@@ -1,5 +1,5 @@
 <h2>From CSV to Data Warehouse: Modeling E-commerce Data for Analysis </h2>
-<img src="./images/dimensional model.png" alt="DE-workflow" title="Data Pipeline Worflow">
+<img src="./images/dimensional model.png" alt="DE-workflow" title="Dimensional model">
 
 <h3> Goal Of The Project:</h3>
 Empower Data-Driven Decisions: Create a Star Schema Data Warehouse to Store and Analyze E-commerce Data, Driving Strategic Business Decisions.
@@ -33,10 +33,26 @@ The columns are:
 <p>This dimensional model consists of 4 dimension tables and 2 fact tables.
 The dimension table are presented as TableName_DIM with a suffix DIM and for fact table, Fact as the suffix, TableName_Fact.
 <ol type="i">
-    <li>Invoice_DIM:</li>
-     <img src="./images/invoice.png" alt="DE-workflow" title="Data Pipeline Worflow"> </img>
+    <li>Invoice_DIM:</li> <br>
+     <img src="./images/invoice.png" alt="DE-workflow" title="INVOICE"> </img>
      <br>
      Here, Invoice_key is the primary key,for primary key, I have used the surrogate key which is an auto-increment, set during this table was built.
      Where as, InvoiceNo is the Natural Key.
+    <br>
+    <br>
+     <li> StockCode_DIM:</li>
+     <br>
+     <img src="./images/stockcode.png" alt="DE-workflow" title="StockCode"> </img> 
+     <br>
+     Here, there are three columns in total, Stock_key is the primary key which is the surrogate key (set as auto-increment). StockCode is the Natural key and description is the column that holds the information about the product.
+    <br>
+    <br>
+    <li> Date_DIM: </li>
+    <br>
+    <img src="./images/date.png" title="date"> </img>  
+    <br>
+    It contains two columns, Date_Key is the primary key (surrogate key set to an auto-increment) and Date which hold the date information when certain event or transaction took place.
+    <br>
+    <li>
 </ol>
  </p>
