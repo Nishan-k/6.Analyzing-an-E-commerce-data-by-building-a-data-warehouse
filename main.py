@@ -84,7 +84,23 @@ cursor.execute("""
     )
 """)
 
-
+# TODO:7 Create a table for storing price data:
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS DEMO_PRICE(
+        PRICE_KEY INT NOT NULL AUTO_INCREMENT,
+        PRICE FLOAT,
+        PRIMARY KEY(PRICE_KEY)
+    )
+""")
+               
+# TODO: 8 Create a table for storing the quantity data:
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS DEMO_QUANTITY(
+        QUANTITY_KEY INT NOT NULL AUTO_INCREMENT,
+        QUANTITY INT,
+        PRIMARY KEY(QUANTITY_KEY)
+    )
+""")
            
 # Print the tables created till now:
 cursor.execute("SHOW tables;")
@@ -102,6 +118,9 @@ date_df = df[['InvoiceDate']]
 customer_df = df[['CustomerID', 'Country']]
 customer_df = customer_df.fillna(value="NA")
 
+
+price_df = df[['UnitPrice']]
+Quantity_df = df[['Quantity']]
 # Insert into the INVOICE_DIM dimension tables:
 
 invoice_df_query = ("""
@@ -145,4 +164,30 @@ date_dim_query = (
 for i,row in date_df.iterrows():
     cursor.execute(date_dim_query, list(row))
 
+
+
+# INSERT INTO QUANTITY DEMO TABLE:
+price_demo_query = (
+        """
+            INSERT INTO DEMO_PRICE(PRICE)
+            VALUES(%s);
+        """
+)
+
+for i,row in price_df.iterrows():
+    cursor.execute(price_demo_query, list(row))
+
+
+
+# INSERT INTO PRICE DEMO TABLE:
+quantity_demo_query = (
+    """
+        INSERT INTO DEMO_QUANTITY(QUANTITY)
+        VALUES(%s);
+    """
+
+)
+for i,row in Quantity_df.iterrows():
+    cursor.execute(quantity_demo_query, list(row))
+    
 conn.commit()
