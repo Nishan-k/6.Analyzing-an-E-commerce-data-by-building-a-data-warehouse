@@ -23,10 +23,10 @@ cursor.execute("""
 
 # TODO:2 Create StockCode_DIM table:
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS STOCKCODE_DIM(
+    CREATE TABLE  IF NOT EXISTS STOCKCODE_DIM(
         STOCK_KEY INT NOT NULL AUTO_INCREMENT,
-        STOCKCODE VARCHAR(230),
-        DESCRIPTION VARCHAR(300),
+        STOCKCODE VARCHAR(230) NULL ,
+        DESCRIPTION VARCHAR(300) NULL,
         PRIMARY KEY(STOCK_KEY)
     )
 """)
@@ -97,3 +97,22 @@ invoice_df = df[['InvoiceNo']]
 stock_code_df = df[['StockCode','Description']]
 date_df = df[['InvoiceDate']]
 customer_df = df[['CustomerID', 'Country']]
+
+# Insert into the INVOICE_DIM dimension tables:
+# invoice_df_query = ("""
+#     INSERT INTO invoice_dim(INVOICE_NO) VALUES(%s);
+# """)
+
+# for i,row in invoice_df.iterrows():
+#     cursor.execute(invoice_df_query, list(row))
+
+# # Insert into the STOCKCODE_DIM table:
+stock_df_query = ("""
+    INSERT INTO STOCKCODE_DIM(STOCKCODE, DESCRIPTION)
+    VALUES(%s, %s);
+""")
+
+for i, row in stock_code_df.iterrows():
+    cursor.execute(stock_df_query, list(row))
+
+
