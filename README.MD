@@ -53,6 +53,11 @@ The dimension table are presented as TableName_DIM with a suffix DIM and for fac
     <br>
     It contains two columns, Date_Key is the primary key (surrogate key set to an auto-increment) and Date which hold the date information when certain event or transaction took place.
     <br>
-    <li>
+    <br>
+    <li > Customer_DIM: </li>
+    <br>
+    <img src="./images/customer.png" title="customer"> </img>
+    <br>
+    This dimensional table contains Customer_Key as the primary key(surrogate key set to an auto-increment), Customer_ID as the Natural Key and country of the customer.
 </ol>
  </p>
