@@ -85,6 +85,7 @@ cursor.execute("""
 """)
 
 
+           
 # Print the tables created till now:
 cursor.execute("SHOW tables;")
 tables = cursor.fetchall()
@@ -96,24 +97,22 @@ for table in tables:
 invoice_df = df[['InvoiceNo']]
 stock_code_df = df[['StockCode','Description']]
 stock_code_df = stock_code_df.fillna(value="NA")
-stock_code_df['Description'].fillna(value='NA', inplace=True)
-
-print(stock_code_df.columns[stock_code_df.isin(['nan']).any()])
-print(stock_code_df.isna().sum())
-
 
 date_df = df[['InvoiceDate']]
 customer_df = df[['CustomerID', 'Country']]
+customer_df = customer_df.fillna(value="NA")
 
 # Insert into the INVOICE_DIM dimension tables:
-# invoice_df_query = ("""
-#     INSERT INTO invoice_dim(INVOICE_NO) VALUES(%s);
-# """)
 
-# for i,row in invoice_df.iterrows():
-#     cursor.execute(invoice_df_query, list(row))
+invoice_df_query = ("""
+    INSERT INTO invoice_dim(INVOICE_NO) VALUES(%s);
+""")
+
+for i,row in invoice_df.iterrows():
+    cursor.execute(invoice_df_query, list(row))
 
 # # Insert into the STOCKCODE_DIM table:
+
 stock_df_query = ("""
     INSERT INTO STOCKCODE_DIM(STOCKCODE, DESCRIPTION)
     VALUES(%s, %s);
@@ -123,3 +122,27 @@ for i, row in stock_code_df.iterrows():
     cursor.execute(stock_df_query, list(row))
 
 
+# Insert into Customer_DIM table:
+customer_df_query = (
+    """
+        INSERT INTO CUSTOMER_DIM(CUSTOMER_ID, COUNTRY)
+        VALUES(%s,%s);
+    """
+)
+for i,row in customer_df.iterrows():
+    cursor.execute(customer_df_query, list(row))
+
+
+
+# Insert into Date_DIM table:
+date_dim_query = (
+    """
+        INSERT INTO DATE_DIM(DATE)
+        VALUES(%s);
+    """
+)
+
+for i,row in date_df.iterrows():
+    cursor.execute(date_dim_query, list(row))
+
+conn.commit()
