@@ -56,8 +56,30 @@ The dimension table are presented as TableName_DIM with a suffix DIM and for fac
     <br>
     <li > Customer_DIM: </li>
     <br>
-    <img src="./images/customer.png" title="customer"> </img>
+    <img src="./images/customer.png" title="customer "> </img>
     <br>
     This dimensional table contains Customer_Key as the primary key(surrogate key set to an auto-increment), Customer_ID as the Natural Key and country of the customer.
+    <br>
+    <br>
+    <li> Price_Fact:</li>
+    <br>
+    <img src="./images/price.png" title="customer "> </img>
+     <br>
+     <p>Here, this fact table contains 5 columns in total, the primary keys are all the foreign keys that are used in this table, suffixed by _Key. They are representd as PK,FK.  All these foreign keys are the primary keys of the other 4 dimensional tables and a column Price that holds our facts/measurements/metrics.
+     <br>
+     <br>
+     <li> Quantity_Fact: </li>
+     <br>
+     <img src="./images/quantity.png" title="quantity "> </img>
+    <br>
+    <p>This fact table consists of 5 columns, the first 4 columns are the primary key of this table, which are the foreign keys of the other 4 dimensional tables, represented as PK,FK.
+    And there is the quantity column, which will hold the facts/metrics/measurement.
 </ol>
  </p>
+ <br>
+ <h3>REASON OF CREATING TWO FACT TABLES INSTEAD OF ONE: </H3>
+In order for two or more facts to go into the same table,it must fulfill two conditions:
+<ol>
+    <li>Both of the facts should have the same level of granularity.</li>
+    <li> Both of the facts must occur simultaneously </li>
+</ol>
