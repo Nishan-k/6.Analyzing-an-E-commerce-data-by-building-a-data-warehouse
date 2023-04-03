@@ -1,11 +1,12 @@
 import pandas as pd
 import mysql.connector
+import credentials
 
 df = pd.read_csv("./data/data.csv", encoding='iso-8859-1')
 
 print(df.head())
 
-conn =  mysql.connector.connect(host="127.0.0.1",user="root", password="livelifehard123@")
+conn =  mysql.connector.connect(host=credentials.host_name,user=credentials.user_name, password=credentials.password)
 
 cursor = conn.cursor()
 cursor.execute("USE ecommerce;")
@@ -51,8 +52,8 @@ cursor.execute("""
 
 
 # TODO:5 Create Quantity_Fact table:
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS QUANTITY_FACT(
-        INVOICE_KEY 
-    ) 
-""")
+# cursor.execute("""
+#     CREATE TABLE IF NOT EXISTS QUANTITY_FACT(
+#         INVOICE_KEY 
+#     ) 
+# """)
