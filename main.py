@@ -83,3 +83,17 @@ cursor.execute("""
         FOREIGN KEY (DATE_KEY) REFERENCES DATE_DIM(DATE_KEY)
     )
 """)
+
+
+# Print the tables created till now:
+cursor.execute("SHOW tables;")
+tables = cursor.fetchall()
+for table in tables:
+    print(table)
+
+
+# Slicing the data from the dataframe to insert into particular dimension tables:
+invoice_df = df[['InvoiceNo']]
+stock_code_df = df[['StockCode','Description']]
+date_df = df[['InvoiceDate']]
+customer_df = df[['CustomerID', 'Country']]
