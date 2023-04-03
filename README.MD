@@ -14,7 +14,7 @@ Empower Data-Driven Decisions: Create a Star Schema Data Warehouse to Store and 
 </ol>
 
 
-<h4 id="data">1. About the data </h4>
+<h4 id="data"> <b> 1. About the data </b></h4>
 The data was used from the <a href="https://www.kaggle.com/datasets/carrie1/ecommerce-data"> Kaggle </a>. 
 It is the dataset about an E-commerce site, which has 8 columns in total.
 The columns are:
@@ -29,7 +29,7 @@ The columns are:
      <li>Country</li>
 </ol>
 
-<h4 id="#architecture">2. The Architecture </h4>
+<h4 id="architecture"> <b> 2. The Architecture </b></h4>
 <p>This dimensional model consists of 4 dimension tables and 2 fact tables.
 The dimension table are presented as TableName_DIM with a suffix DIM and for fact table, Fact as the suffix, TableName_Fact.
 <ol type="i">
@@ -76,10 +76,25 @@ The dimension table are presented as TableName_DIM with a suffix DIM and for fac
     And there is the quantity column, which will hold the facts/metrics/measurement.
 </ol>
  </p>
+ <b>
+ <br>The Final Dimensional Architecture. </b>
  <br>
+<img src="./images/dim.png" title="quantity "> </img>
+
  <h3>REASON OF CREATING TWO FACT TABLES INSTEAD OF ONE: </H3>
 In order for two or more facts to go into the same table,it must fulfill two conditions:
 <ol>
     <li>Both of the facts should have the same level of granularity.</li>
     <li> Both of the facts must occur simultaneously </li>
 </ol>
+<p> Since they don't satisfy these conditions as well as belong to different facts, I have kept them in a separate fact table.
+</p>
+<br>
+<h4 id="steps"> <b>3. Steps Implemented: </b></h4>
+So, first I read the data frame in Pandas, since SQL was not able to handle the NAN values, I replaced it with NA. The reason of not dropping the NAN values is, I am depicting a Data Warehouse, and in Data warehouse, we keep the data as it is obtained from the source else the major funcionality of the Data warehouse i.e. one stop shop for the historical data won't make sense.
+<br>
+Then I extracted the required fields as per the dimension in different dataframe and first inserted the data into all the dimensional tables and at last inserted the data into the fact tables.
+<br>
+<br>
+<h4 id="analysis"> <b> 4. Analysis:</b> </h4>
+<p> TO BE CONTINUED </P>
