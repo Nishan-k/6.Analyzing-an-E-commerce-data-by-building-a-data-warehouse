@@ -95,6 +95,13 @@ for table in tables:
 # Slicing the data from the dataframe to insert into particular dimension tables:
 invoice_df = df[['InvoiceNo']]
 stock_code_df = df[['StockCode','Description']]
+stock_code_df = stock_code_df.fillna(value="NA")
+stock_code_df['Description'].fillna(value='NA', inplace=True)
+
+print(stock_code_df.columns[stock_code_df.isin(['nan']).any()])
+print(stock_code_df.isna().sum())
+
+
 date_df = df[['InvoiceDate']]
 customer_df = df[['CustomerID', 'Country']]
 
